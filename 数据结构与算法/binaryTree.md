@@ -5,51 +5,49 @@
 > 2. <a href="https://en.wikipedia.org/wiki/Binary_tree">wikipedia: binary Tree</a>
 
 定义二叉树:
-```
-struct TreeNode {
-    int data;
-    TreeNode *left, *right;
-    TreeNode(){}
-    TreeNode(int _data, TreeNode* _left, TreeNode* _right):data(_data), left(_left), right(_right){}
-};
-```
+
 ## 1. 二叉树的遍历
 > **题目**: 给出二叉树的层次遍历, 前序, 中序, 后序 遍历.    
 > **扩展**: 前序遍历的迭代形式,希望大家自行手写中序和后序的迭代代码, 很多公司会问道非递归代码.
 ```
-// 前序遍历: 根 -> 左 -> 右 [感谢wbzhang233(https://github.com/wbzhang233)同学提出问题]
-void printPostorder(struct TreeNode* node) { 
-    if (node == NULL) 
-        return;   
-    // 根
-    cout << node->data << "";
-    // 左
-    printPostorder(node->left); 
-    // 右
-    printPostorder(node->right);   
-} 
-// 中序遍历: 左 -> 根 -> 右  
-void printInorder(struct TreeNode* node) { 
-    if (node == NULL) 
-        return; 
-    // 左
-    printInorder(node->left);   
-    // 根
-    cout << node->data << " ";   
-    // 右
-    printInorder(node->right); 
-} 
-// 后序遍历: 左 -> 右 -> 根 [感谢wbzhang233(https://github.com/wbzhang233)同学提出问题]
-void printPreorder(struct TreeNode* node) { 
-    if (node == NULL) 
-        return; 
-    // 左
-    printPreorder(node->left);  
-    // 右
-    printPreorder(node->right);
-    // 根
-    cout << node->data << " ";
-}  
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]: 
+        res = []
+        stack = []
+        cur = root
+        # 中序，模板：先用指针找到每颗子树的最左下角，然后进行进出栈操作
+        #左 -> 根 -> 右  
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            res.append(cur.val)
+            cur = cur.right
+        return res
+        
+        # # 前序，相同模板 根 -> 左 -> 右
+        # while stack or cur:
+        #     while cur:
+        #         res.append(cur.val)
+        #         stack.append(cur)
+        #         cur = cur.left
+        #     cur = stack.pop()
+        #     cur = cur.right
+        # return res
+        
+        # # 后序，相同模板， 左 -> 右 -> 根
+        # while stack or cur:
+        #     while cur:
+        #         res.append(cur.val)
+        #         stack.append(cur)
+        #         cur = cur.right
+        #     cur = stack.pop()
+        #     cur = cur.left
+        # return res[::-1]
+        
+
+
 
 // 层次遍历 
 void printLevelOrder(struct TreeNode* node) {
@@ -399,29 +397,6 @@ void longestConsecutiveUtil(Node* root, int curLength, int expected, int& res) {
 ```
 
 ```
-class Solution {
-public:
-    int longestConsecutive2(TreeNode * root) {
-        // write your code here
-        int res = 0;
-        helper(root, root, res);
-        return res;
-    }    
-    pair<int, int> helper(TreeNode* node, TreeNode* parent, int& res) {
-        if (!node) return {0, 0};
-        auto left = helper(node->left, node, res);
-        auto right = helper(node->right, node, res);
-        res = max(res, left.first + right.second + 1);
-        res = max(res, left.second + right.first + 1);
-        int inc = 0, dec = 0;
-        if (node->val == parent->val + 1) {
-            inc = max(left.first, right.first) + 1;
-        } else if (node->val + 1 == parent->val) {
-            dec = max(left.second, right.second) + 1;
-        }
-        return {inc, dec};
-    }
-};
 
 ```
 ## 11. 左边看到的二叉树结点
