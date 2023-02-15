@@ -3,8 +3,9 @@ Author: Summer;     Email: huangmeihong11@sina.com
 ## 直观解释
 协同过滤是推荐算法中最常用的算法之一，它根据user与item的交互，发现item之间的相关性，或者发现user之间的相关性，进行推荐。比如你有位朋友看电影的爱好跟你类似，然后最近新上了《调音师》，他觉得不错，就会推荐给你，这是最简单的基于user的协同过滤算法（user-based collaboratIve filtering），还有一种是基于item的协同过滤算法（item-based collaborative filtering），比如你非常喜欢电影《当幸福来敲门的时候》，那么观影系统可能会推荐一些类似的励志片给你，比如《风雨哈佛路》等。如下主要分析user-based，item-based同理。
 
+Collaborative filtering is one of the most commonly used algorithms in recommendation algorithms. It discovers the correlation between items or the correlation between users according to the interaction between users and items, and makes recommendations. For example, you have a friend whose hobby of watching movies is similar to yours, and recently came to "Tuner", and he thinks it is good, so he will recommend it to you. This is the simplest user-based collaborative filtering algorithm (user-based collaborative filtering algorithm). filtering), there is also an item-based collaborative filtering algorithm (item-based collaborative filtering), for example, if you like the movie "When Happiness Knocks on the Door" very much, then the viewing system may recommend some similar inspirational movies to you , such as "The Wind and Rain Harvard Road" and so on. The following mainly analyzes user-based and item-based in the same way.
 ## 导图
-![图片](https://uploader.shimo.im/f/8mslGdORa5YzVRXW!thumbnail)
+
 ## 核心公式
 * 符号定义
 $r_{u,i}$：user $u$ 对 item $i$ 的评分
